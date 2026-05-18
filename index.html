@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.E.W.S. — North Eastern Widows Sons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="lib/lightgallery/css/lightgallery.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --black:      #f4efe4;
+            --dark:       #ede5d4;
+            --panel:      #ffffff;
+            --gold:       #8c6a18;
+            --gold-light: #b8902e;
+            --gold-dim:   rgba(140,106,24,0.22);
+            --white:      #1c1610;
+            --muted:      #8c7d64;
+            --text:       #3d3020;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--black);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 1.125rem;
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ──────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            padding: 1.25rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.45s ease, border-color 0.45s ease;
+            border-bottom: 1px solid transparent;
+        }
+        nav.solid {
+            background: rgba(244,239,228,0.96);
+            border-color: var(--gold-dim);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: var(--gold);
+            letter-spacing: 0.12em;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.25rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.75;
+            transition: color 0.2s, opacity 0.2s;
+        }
+        .nav-links a:hover { color: var(--gold); opacity: 1; }
+
+        /* hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--gold);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 150;
+            background: rgba(244,239,228,0.98);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--gold); }
+
+        /* ── HERO ─────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        /* crosshatch texture */
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(45deg,  rgba(140,106,24,0.07) 0, rgba(140,106,24,0.07) 1px, transparent 1px, transparent 42px),
+                repeating-linear-gradient(-45deg, rgba(140,106,24,0.07) 0, rgba(140,106,24,0.07) 1px, transparent 1px, transparent 42px);
+            pointer-events: none;
+        }
+        /* radial focus */
+        #hero .hero-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(255,255,255,0.5) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        /* gold top bar */
+        #hero .hero-topbar {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 40%, var(--gold-light) 50%, var(--gold) 60%, transparent 100%);
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            padding: 7rem 2rem 5rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* The big N.E.W.S. */
+        .hero-acronym {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 0;
+            margin-bottom: 1.75rem;
+            animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
+        }
+        .hero-letter {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: clamp(5.5rem, 16vw, 13rem);
+            color: var(--gold);
+            line-height: 1;
+            text-shadow:
+                0 0 60px rgba(140,106,24,0.12),
+                0 2px 4px rgba(0,0,0,0.08);
+            letter-spacing: -0.01em;
+        }
+        .hero-dot {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 9vw, 7rem);
+            color: rgba(201,168,76,0.4);
+            align-self: flex-start;
+            margin-top: 0.25em;
+            line-height: 1;
+        }
+
+        .hero-fullname {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.6rem, 1.4vw, 0.88rem);
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--text);
+            opacity: 0.6;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.9s 0.18s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        .hero-rule {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 2.5rem;
+            animation: fadeUp 0.9s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        .hero-tagline {
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(1.1rem, 2.6vw, 1.55rem);
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: fadeUp 0.9s 0.42s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        .compass-rose-wrap {
+            margin: 3.5rem auto 0;
+            animation: fadeUp 0.9s 0.6s cubic-bezier(0.22,1,0.36,1) both;
+        }
+        .compass-rose {
+            width: 88px;
+            height: 88px;
+            opacity: 0.35;
+            animation: compassSpin 60s linear infinite;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeIn 1s 1.2s ease forwards;
+        }
+        .scroll-hint span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .scroll-arrow {
+            width: 1px;
+            height: 44px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: arrowPulse 2.2s ease infinite;
+        }
+
+        /* ── SECTION SHARED ────────────────────────────── */
+        section { padding: 7rem 2rem; }
+        .section-inner { max-width: 1120px; margin: 0 auto; }
+
+        .section-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.9rem, 5vw, 3.4rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 0;
+        }
+        .section-rule {
+            width: 56px;
+            height: 2px;
+            background: var(--gold);
+            margin: 1.6rem 0 2.75rem;
+        }
+
+        /* ── ABOUT ─────────────────────────────────────── */
+        #about {
+            background: var(--dark);
+            border-top: 1px solid var(--gold-dim);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        .about-text p {
+            font-size: 1.13rem;
+            line-height: 1.82;
+            color: var(--text);
+            margin-bottom: 1.4rem;
+        }
+        .about-text p:first-of-type::first-letter {
+            font-family: 'Cinzel', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            float: left;
+            line-height: 0.78;
+            margin-right: 0.08em;
+            margin-top: 0.12em;
+        }
+
+        .about-seal {
+            border: 1px solid var(--gold-dim);
+            padding: 3rem 2.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        /* inner frame */
+        .about-seal::before {
+            content: '';
+            position: absolute;
+            top: 7px; right: 7px; bottom: 7px; left: 7px;
+            border: 1px solid rgba(140,106,24,0.12);
+            pointer-events: none;
+        }
+        /* corner ornaments */
+        .about-seal::after {
+            content: '✦';
+            position: absolute;
+            top: -0.6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 0.8rem;
+            background: var(--dark);
+            padding: 0 0.5rem;
+        }
+
+        .seal-svg {
+            width: 110px;
+            height: 110px;
+            opacity: 0.55;
+        }
+
+        .about-facts {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+        .fact {
+            border-left: 2px solid var(--gold);
+            padding-left: 1.1rem;
+        }
+        .fact-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+        .fact-value {
+            font-size: 0.97rem;
+            color: var(--white);
+        }
+
+        /* ── GALLERY ───────────────────────────────────── */
+        #gallery {
+            background: var(--black);
+            border-top: 1px solid var(--gold-dim);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 3rem;
+        }
+        .photo-slot {
+            height: 350px;
+            background: var(--dark);
+            border: 1px solid rgba(140,106,24,0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .photo-slot::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg,   transparent 0, transparent 28px, rgba(140,106,24,0.06) 28px, rgba(140,106,24,0.06) 29px),
+                repeating-linear-gradient(90deg,  transparent 0, transparent 28px, rgba(140,106,24,0.06) 28px, rgba(140,106,24,0.06) 29px);
+            pointer-events: none;
+        }
+        .photo-slot:hover {
+            border-color: rgba(140,106,24,0.38);
+            box-shadow: inset 0 0 30px rgba(140,106,24,0.04);
+        }
+        .photo-slot img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 2rem 1.25rem 1.1rem;
+            background: linear-gradient(to top, rgba(28,22,16,0.82) 0%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .photo-caption a { pointer-events: auto; }
+        .photo-caption-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #f4efe4;
+            display: block;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.3rem;
+        }
+        .photo-caption-sub {
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-size: 0.82rem;
+            color: rgba(244,239,228,0.75);
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+        .photo-caption-link {
+            font-family: 'Cinzel', serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            color: var(--gold-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184,144,46,0.4);
+            transition: border-color 0.2s;
+        }
+        .photo-caption-link:hover { border-color: var(--gold-light); }
+
+        /* HSN featured donation photo */
+        .giving-feature {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        .giving-feature img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+        }
+        .giving-feature-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 2.5rem 2rem 1.5rem;
+            background: linear-gradient(to top, rgba(28,22,16,0.8), transparent);
+        }
+        .giving-feature-caption span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            color: #f4efe4;
+        }
+
+        /* ── PHILANTHROPY ─────────────────────────────── */
+        #philanthropy {
+            background: var(--dark);
+            border-top: 1px solid var(--gold-dim);
+        }
+        .giving-intro {
+            max-width: 660px;
+            font-size: 1.13rem;
+            line-height: 1.82;
+            color: var(--text);
+            margin-bottom: 4rem;
+        }
+        .giving-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .giving-card {
+            background: var(--panel);
+            border-top: 3px solid var(--gold);
+            padding: 2.5rem 2.2rem 2.8rem;
+            position: relative;
+            transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
+        }
+        .giving-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(140,106,24,0.22), transparent);
+        }
+        .giving-card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 24px 48px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(140,106,24,0.18);
+        }
+        .giving-amount {
+            font-family: 'Cinzel', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+        .giving-amount-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 1.75rem;
+        }
+        .giving-charity {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+        .giving-desc {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.65;
+            opacity: 0.82;
+        }
+
+        /* ── CONTACT ───────────────────────────────────── */
+        #contact {
+            background: var(--black);
+            border-top: 1px solid var(--gold-dim);
+            text-align: center;
+        }
+        .contact-inner {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .contact-lead {
+            font-size: 1.15rem;
+            line-height: 1.82;
+            color: var(--text);
+            margin-bottom: 3rem;
+        }
+        .contact-reasons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+            text-align: left;
+        }
+        .contact-reason {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 1.1rem 1.4rem;
+            background: var(--dark);
+            border-left: 2px solid var(--gold);
+        }
+        .contact-reason-icon {
+            font-family: 'Cinzel', serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .contact-reason-text {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .contact-email-wrap {
+            display: inline-block;
+        }
+        .contact-email {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--gold-dim);
+            padding-bottom: 0.2rem;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .contact-email:hover {
+            color: var(--gold-light);
+            border-color: var(--gold);
+        }
+
+        /* ── FOOTER ────────────────────────────────────── */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--gold-dim);
+            padding: 5.5rem 2rem 3.5rem;
+            text-align: center;
+        }
+        .footer-compass {
+            width: 56px;
+            height: 56px;
+            opacity: 0.35;
+            margin: 0 auto 2rem;
+        }
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 2.2rem;
+            color: var(--gold);
+            letter-spacing: 0.14em;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .footer-chapter {
+            font-family: 'Cinzel', serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2.5rem;
+        }
+        .footer-divider {
+            width: 50px;
+            height: 1px;
+            background: var(--gold-dim);
+            margin: 0 auto 2.5rem;
+        }
+        .footer-parent {
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .footer-parent a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,168,76,0.3);
+            transition: opacity 0.2s;
+        }
+        .footer-parent a:hover { opacity: 0.7; }
+        .footer-disclaimer {
+            font-size: 0.83rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(140,106,24,0.15);
+            line-height: 1.7;
+        }
+        .footer-copy {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            margin-top: 1.2rem;
+            opacity: 0.45;
+        }
+
+        /* ── ANIMATIONS ────────────────────────────────── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 0.5; }
+        }
+        @keyframes compassSpin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @keyframes arrowPulse {
+            0%, 100% { opacity: 0.5; transform: scaleY(1); transform-origin: top; }
+            50%       { opacity: 1;   transform: scaleY(1.15); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22,1,0.36,1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ────────────────────────────────── */
+        @media (max-width: 900px) {
+            .about-grid    { grid-template-columns: 1fr; gap: 3rem; }
+            .giving-cards  { grid-template-columns: 1fr; max-width: 420px; }
+            .gallery-grid  { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .hero-fullname { letter-spacing: 0.22em; }
+            section { padding: 5rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ───────────────────────────────────── -->
+<nav id="nav">
+    <a href="#hero" class="nav-logo">N.E.W.S.</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#philanthropy">Giving Back</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about"        onclick="closeMobile()">About</a>
+    <a href="#gallery"      onclick="closeMobile()">Gallery</a>
+    <a href="#philanthropy" onclick="closeMobile()">Giving Back</a>
+    <a href="#contact"      onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────── -->
+<section id="hero">
+    <div class="hero-topbar"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-inner">
+        <div class="hero-acronym">
+            <span class="hero-letter">N</span><span class="hero-dot">.</span>
+            <span class="hero-letter">E</span><span class="hero-dot">.</span>
+            <span class="hero-letter">W</span><span class="hero-dot">.</span>
+            <span class="hero-letter">S</span><span class="hero-dot">.</span>
+        </div>
+
+        <p class="hero-fullname">North &nbsp;&middot;&nbsp; Eastern &nbsp;&middot;&nbsp; Widows &nbsp;&middot;&nbsp; Sons</p>
+
+        <div class="hero-rule"></div>
+
+        <p class="hero-tagline">Brotherhood forged in Masonic tradition,<br>bound by the open road.</p>
+
+        <!-- Compass rose — N.E.W.S. as cardinal points -->
+        <div class="compass-rose-wrap">
+            <svg class="compass-rose" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="47" stroke="#c9a84c" stroke-width="1"/>
+                <circle cx="50" cy="50" r="39" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 6"/>
+                <!-- N point (top, bright) -->
+                <polygon points="50,5 53.5,22 50,18 46.5,22" fill="#c9a84c"/>
+                <!-- S point -->
+                <polygon points="50,95 53.5,78 50,82 46.5,78" fill="#c9a84c" opacity="0.45"/>
+                <!-- E point -->
+                <polygon points="95,50 78,46.5 82,50 78,53.5" fill="#c9a84c" opacity="0.45"/>
+                <!-- W point -->
+                <polygon points="5,50 22,46.5 18,50 22,53.5" fill="#c9a84c" opacity="0.45"/>
+                <!-- Cross arms -->
+                <line x1="50" y1="5"  x2="50" y2="95" stroke="#c9a84c" stroke-width="0.4" opacity="0.25"/>
+                <line x1="5"  y1="50" x2="95" y2="50" stroke="#c9a84c" stroke-width="0.4" opacity="0.25"/>
+                <!-- Diagonal arms -->
+                <line x1="16" y1="16" x2="84" y2="84" stroke="#c9a84c" stroke-width="0.3" opacity="0.15"/>
+                <line x1="84" y1="16" x2="16" y2="84" stroke="#c9a84c" stroke-width="0.3" opacity="0.15"/>
+                <!-- Cardinal labels -->
+                <text x="50"  y="13"  text-anchor="middle" fill="#c9a84c" font-size="7" font-family="serif" font-weight="700">N</text>
+                <text x="50"  y="93"  text-anchor="middle" fill="#c9a84c" font-size="7" font-family="serif" opacity="0.45">S</text>
+                <text x="91"  y="53"  text-anchor="middle" fill="#c9a84c" font-size="7" font-family="serif" opacity="0.45">E</text>
+                <text x="9"   y="53"  text-anchor="middle" fill="#c9a84c" font-size="7" font-family="serif" opacity="0.45">W</text>
+                <!-- Centre jewel -->
+                <circle cx="50" cy="50" r="5" fill="#c9a84c" opacity="0.7"/>
+                <circle cx="50" cy="50" r="2.5" fill="#0a0a08"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────── -->
+<section id="about">
+    <div class="section-inner">
+        <div class="about-grid">
+
+            <div class="about-text reveal">
+                <span class="section-label">Who We Are</span>
+                <h2 class="section-title">Brothers of the Square &amp; Throttle</h2>
+                <div class="section-rule"></div>
+                <p>The North Eastern Widows Sons (N.E.W.S.) is a chapter of the Widows Sons Ontario — a motorcycle riding association comprised exclusively of Master Masons and their families. We are brothers united by a shared love of the open road and the timeless principles of Freemasonry: brotherly love, relief, and truth.</p>
+                <p>Riding together across north eastern Ontario, we carry those principles with us on every mile. Our chapter is a place where the ritual of the lodge meets the freedom of the highway — a brotherhood that extends far beyond the temple door.</p>
+                <p>We are not a gang, 1% club, or MC, nor do we intend disrespect to any. We are proud Masons who ride, and proud riders who are Masons.</p>
+            </div>
+
+            <div class="about-seal reveal">
+                <!-- Square & Compass SVG -->
+                <svg class="seal-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Compass legs -->
+                    <line x1="60" y1="18" x2="28" y2="94" stroke="#c9a84c" stroke-width="2.8" stroke-linecap="round"/>
+                    <line x1="60" y1="18" x2="92" y2="94" stroke="#c9a84c" stroke-width="2.8" stroke-linecap="round"/>
+                    <!-- Compass spread arc -->
+                    <path d="M 36 72 Q 60 88 84 72" stroke="#c9a84c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <!-- Square (L-shape) -->
+                    <path d="M 22 52 L 22 98 L 68 98" stroke="#c9a84c" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- G -->
+                    <text x="60" y="60" text-anchor="middle" fill="#c9a84c" font-size="20" font-family="serif" font-weight="700" letter-spacing="0">G</text>
+                    <!-- Corner stars -->
+                    <circle cx="18" cy="18" r="1.8" fill="#c9a84c" opacity="0.35"/>
+                    <circle cx="102" cy="18" r="1.8" fill="#c9a84c" opacity="0.35"/>
+                    <circle cx="18" cy="102" r="1.8" fill="#c9a84c" opacity="0.35"/>
+                    <circle cx="102" cy="102" r="1.8" fill="#c9a84c" opacity="0.35"/>
+                </svg>
+
+                <div class="about-facts">
+                    <div class="fact">
+                        <span class="fact-label">Chapter</span>
+                        <span class="fact-value">North Eastern Widows Sons</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-label">Province</span>
+                        <span class="fact-value">Ontario, Canada</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-label">Parent Organization</span>
+                        <span class="fact-value">Widows Sons Ontario</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-label">Membership</span>
+                        <span class="fact-value">Open to Master Masons in good standing</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-label">Minimum Displacement</span>
+                        <span class="fact-value">500cc</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── GALLERY ────────────────────────────────── -->
+<section id="gallery">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-label">On the Road</span>
+            <h2 class="section-title">Chapter Gallery</h2>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+</section>
+
+<!-- ── PHILANTHROPY ────────────────────────────── -->
+<section id="philanthropy">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-label">Community</span>
+            <h2 class="section-title">Giving Back</h2>
+            <div class="section-rule"></div>
+            <p class="giving-intro">At the heart of everything we do is a commitment to our community. The brothers of N.E.W.S. are proud to support local charities and organizations that make a real difference in the lives of our neighbours across north eastern Ontario.</p>
+        </div>
+
+        <div class="giving-feature reveal" id="giving-feature">
+            <a class="lg-item" href="images/hsn-donation-2026.jpg">
+                <img src="images/hsn-donation-2026.jpg" alt="N.E.W.S. presenting $1,000 cheque to the HSN Foundation, March 2026">
+            </a>
+            <div class="giving-feature-caption">
+                <span>N.E.W.S. presents $1,000 to the HSN Foundation &mdash; March 30, 2026</span>
+            </div>
+        </div>
+
+        <div class="giving-cards">
+            <div class="giving-card reveal">
+                <div class="giving-amount">$1,000</div>
+                <span class="giving-amount-label">Donated &mdash; March 2026</span>
+                <div class="giving-charity">HSN Foundation</div>
+                <p class="giving-desc">A $1,000 contribution to the Health Sciences North Foundation, supporting patient care and medical services in our region.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────── -->
+<section id="contact">
+    <div class="section-inner contact-inner">
+        <div class="reveal">
+            <span class="section-label">Get in Touch</span>
+            <h2 class="section-title">Contact Us</h2>
+            <div class="section-rule"></div>
+            <p class="contact-lead">Whether you're a fellow Mason curious about membership, a business interested in supporting our charitable work, or simply want to learn more about who we are — we'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-reasons reveal">
+            <div class="contact-reason">
+                <span class="contact-reason-icon">Joining</span>
+                <span class="contact-reason-text">Are you a Master Mason in good standing with a motorcycle of 500cc or greater? Ask us about becoming a brother of N.E.W.S.</span>
+            </div>
+            <div class="contact-reason">
+                <span class="contact-reason-icon">Sponsorship</span>
+                <span class="contact-reason-text">Interested in partnering with us to support our charitable initiatives? We welcome conversations with local businesses and community organizations.</span>
+            </div>
+            <div class="contact-reason">
+                <span class="contact-reason-icon">General</span>
+                <span class="contact-reason-text">Curious about who we are, what we do, or how to connect with Widows Sons Ontario? Reach out and we'll point you in the right direction.</span>
+            </div>
+        </div>
+
+        <div class="contact-email-wrap reveal">
+            <a class="contact-email" href="mailto:contact@wsnews.ca">contact@wsnews.ca</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+    <svg class="footer-compass" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="47" stroke="#c9a84c" stroke-width="1"/>
+        <polygon points="50,5 53.5,22 50,18 46.5,22" fill="#c9a84c"/>
+        <polygon points="50,95 53.5,78 50,82 46.5,78" fill="#c9a84c" opacity="0.45"/>
+        <polygon points="95,50 78,46.5 82,50 78,53.5" fill="#c9a84c" opacity="0.45"/>
+        <polygon points="5,50 22,46.5 18,50 22,53.5" fill="#c9a84c" opacity="0.45"/>
+        <line x1="50" y1="5" x2="50" y2="95" stroke="#c9a84c" stroke-width="0.4" opacity="0.25"/>
+        <line x1="5" y1="50" x2="95" y2="50" stroke="#c9a84c" stroke-width="0.4" opacity="0.25"/>
+        <circle cx="50" cy="50" r="4" fill="#c9a84c" opacity="0.6"/>
+        <circle cx="50" cy="50" r="2" fill="#0a0a08"/>
+    </svg>
+
+    <span class="footer-logo">N.E.W.S.</span>
+    <p class="footer-chapter">North Eastern Widows Sons</p>
+
+    <div class="footer-divider"></div>
+
+    <p class="footer-parent">A proud chapter of <a href="https://widowssonsontario.com/" target="_blank" rel="noopener noreferrer">Widows Sons Ontario</a></p>
+
+    <p class="footer-parent"><a href="mailto:contact@wsnews.ca">contact@wsnews.ca</a></p>
+
+    <p class="footer-disclaimer">
+        We are not a gang, 1% club, or MC, nor do we intend disrespect to any.<br>
+        We are Master Masons who ride.
+    </p>
+
+    <p class="footer-copy">&copy; 2025 North Eastern Widows Sons &mdash; All rights reserved.</p>
+</footer>
+
+<script src="lib/lightgallery/lightgallery.umd.js"></script>
+<script>
+    // ─────────────────────────────────────────────────────────────
+    // GALLERY — edit this array to add, remove, or reorder photos.
+    //
+    // Each entry:
+    //   src   : path to the image file (relative to index.html)
+    //   alt   : screen-reader description
+    //   title : bold caption line  (optional)
+    //   sub   : italic caption line (optional)
+    //   link  : { href, label } — adds a clickable link in the caption (optional)
+    // ─────────────────────────────────────────────────────────────
+    const galleryImages = [
+        {
+            src:   'images/tail-of-the-dragon.jpg',
+            alt:   "N.E.W.S. chapter on Ontario's Tail of the Dragon",
+            title: "Ontario's Tail of the Dragon",
+            sub:   "Algoma Country chapter ride",
+            link:  {
+                href:  'https://northernontario.travel/algoma-country/riding-algoma-country-ontarios-tail-dragon',
+                label: 'Learn about the route'
+            }
+        },
+        {
+            src:   'images/mexico-visit-2026.jpg',
+            alt:   "Fraternal visit to Widows Sons Grand Chapter, Mexico, 2026",
+            title: "Fraternal Visit — Mexico",
+            sub:   "Widows Sons Grand Chapter, 2026"
+        }
+    ];
+
+    (function buildGallery() {
+        const grid = document.getElementById('gallery-grid');
+        if (!grid || galleryImages.length === 0) return;
+
+        galleryImages.forEach((item) => {
+            const slot = document.createElement('div');
+            slot.className = 'photo-slot reveal';
+
+            // lightGallery needs an <a> wrapping the image; class scopes the selector
+            const a = document.createElement('a');
+            a.className = 'lg-item';
+            a.href = item.src;
+
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.alt || '';
+            a.appendChild(img);
+            slot.appendChild(a);
+
+            if (item.title || item.sub || item.link) {
+                const cap = document.createElement('div');
+                cap.className = 'photo-caption';
+
+                if (item.title) {
+                    const t = document.createElement('span');
+                    t.className = 'photo-caption-title';
+                    t.textContent = item.title;
+                    cap.appendChild(t);
+                }
+                if (item.sub) {
+                    const s = document.createElement('span');
+                    s.className = 'photo-caption-sub';
+                    s.textContent = item.sub;
+                    cap.appendChild(s);
+                }
+                if (item.link) {
+                    const lnk = document.createElement('a');
+                    lnk.className = 'photo-caption-link';
+                    lnk.href = item.link.href;
+                    lnk.textContent = item.link.label + ' →';
+                    lnk.target = '_blank';
+                    lnk.rel = 'noopener';
+                    cap.appendChild(lnk);
+                }
+
+                slot.appendChild(cap);
+            }
+
+            grid.appendChild(slot);
+
+            // One lightGallery instance per slot = single image, no carousel
+            lightGallery(slot, {
+                selector:        '.lg-item',
+                download:        false,
+                counter:         false,
+                closable:        true,
+                backdropDuration: 200,
+            });
+        });
+    })();
+
+    // Lightbox for the Giving Back feature photo
+    const givingFeature = document.getElementById('giving-feature');
+    if (givingFeature) {
+        lightGallery(givingFeature, {
+            selector:         '.lg-item',
+            download:         false,
+            counter:          false,
+            closable:         true,
+            backdropDuration: 200,
+        });
+    }
+
+    // Nav solidifies on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('solid', window.scrollY > 60);
+    }, { passive: true });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
+    function closeMobile() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Scroll-reveal — runs after buildGallery so dynamic slots are included
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const siblings = [...entry.target.parentElement.querySelectorAll(':scope > .reveal')];
+            const idx = Math.max(0, siblings.indexOf(entry.target));
+            setTimeout(() => entry.target.classList.add('visible'), idx * 95);
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
