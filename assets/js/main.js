@@ -45,7 +45,7 @@ mobileMenu.querySelectorAll('a').forEach(a => {
     });
 });
 
-// Fall Colours carousel
+// Fall Colours photo carousel
 const fallCarousel = document.querySelector('.fall-carousel');
 if (fallCarousel) {
     document.getElementById('fall-prev').addEventListener('click', () => {
@@ -62,6 +62,17 @@ if (fallCarousel) {
             closable:        true,
             backdropDuration: 200,
         });
+    });
+}
+
+// Fall Colours video carousel
+const fallVideoCarousel = document.querySelector('.fall-video-carousel');
+if (fallVideoCarousel) {
+    document.getElementById('fall-video-prev').addEventListener('click', () => {
+        fallVideoCarousel.scrollBy({ left: -fallVideoCarousel.offsetWidth, behavior: 'smooth' });
+    });
+    document.getElementById('fall-video-next').addEventListener('click', () => {
+        fallVideoCarousel.scrollBy({ left: fallVideoCarousel.offsetWidth, behavior: 'smooth' });
     });
 }
 
