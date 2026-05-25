@@ -56,18 +56,12 @@ jobs:
           EXISTING=$(gh pr list --base main --head dev --json number,body --jq '.[0]')
           PR_NUM=$(echo "$EXISTING" | jq -r '.number // empty')
           if [ -z "$PR_NUM" ]; then
-            gh pr create \
-              --base main \
-              --head dev \
-              --title "Dev — pending issues" \
-              --body "Preview branch containing completed issues. Merge to publish to main.
-
-Closes #${ISSUE_NUM}"
+            BODY="Preview branch containing completed issues. Merge to publish to main."$'\n\n'"Closes #${ISSUE_NUM}"
+            gh pr create --base main --head dev --title "Dev — pending issues" --body "$BODY"
           else
             CURRENT_BODY=$(echo "$EXISTING" | jq -r '.body')
             if ! echo "$CURRENT_BODY" | grep -q "Closes #${ISSUE_NUM}"; then
-              NEW_BODY="${CURRENT_BODY}
-Closes #${ISSUE_NUM}"
+              NEW_BODY="${CURRENT_BODY}"$'\n'"Closes #${ISSUE_NUM}"
               gh pr edit "$PR_NUM" --body "$NEW_BODY"
             fi
           fi
