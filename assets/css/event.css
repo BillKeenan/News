@@ -159,6 +159,72 @@
     padding: 7rem 2rem;
 }
 
+/* ── VIDEO CAROUSEL SECTION ──────────────────── */
+.event-videos-section {
+    background: var(--black);
+    border-top: 1px solid var(--gold-dim);
+    padding: 7rem 2rem;
+}
+
+.fall-video-carousel-wrap {
+    position: relative;
+    margin-top: 3rem;
+    padding: 0 1.5rem;
+}
+
+.fall-video-carousel {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.fall-video-carousel::-webkit-scrollbar { display: none; }
+
+.fall-video-slide {
+    flex: 0 0 calc(50% - 0.63rem);
+    scroll-snap-align: start;
+    background: var(--dark);
+    border: 1px solid rgba(140,106,24,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.35s ease;
+}
+
+.fall-video-slide:hover {
+    border-color: rgba(140,106,24,0.35);
+}
+
+.video-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(28,22,16,0.85));
+    padding: 1.5rem 1.25rem 1rem;
+    color: #f4efe4;
+}
+
+.video-caption-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--gold-light);
+}
+
+.video-caption-sub {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(244,239,228,0.75);
+    display: block;
+}
+
 /* ── PHOTOS SECTION ──────────────────────────── */
 .event-photos-section {
     background: var(--dark);
@@ -245,10 +311,20 @@
     .event-hero {
         background-attachment: scroll;
     }
+    .fall-video-slide {
+        flex: 0 0 calc(80% - 0.63rem);
+    }
+    .fall-video-carousel-wrap {
+        padding: 0;
+    }
 }
 @media (max-width: 640px) {
     .event-body,
     .event-video-section,
+    .event-videos-section,
     .event-photos-section,
     .event-map-section { padding: 5rem 1.5rem; }
+    .fall-video-slide {
+        flex: 0 0 90%;
+    }
 }

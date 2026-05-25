@@ -69,7 +69,7 @@
 <section class="event-video-section">
     <div class="event-inner">
         <span class="section-label">On the Road</span>
-        <h2 class="section-title">From the Route</h2>
+        <h2 class="section-title">2021 Tour</h2>
         <div class="section-rule"></div>
         <div class="video-wrap">
             <iframe
@@ -80,6 +80,44 @@
         </div>
     </div>
 </section>
+{% endif %}
+
+<!-- ── VIDEO CAROUSEL ────────────────────────── -->
+{% if page.videos_data %}
+{% assign videos = site.data[page.videos_data] %}
+{% if videos %}
+<section class="event-videos-section">
+    <div class="event-inner">
+        <span class="section-label">Previous Years</span>
+        <h2 class="section-title">Video Gallery</h2>
+        <div class="section-rule"></div>
+
+        <div class="fall-video-carousel-wrap">
+            <button class="fall-carousel-btn prev" id="fall-video-prev" aria-label="Previous">&#8592;</button>
+            <div class="fall-video-carousel">
+                {% for video in videos %}
+                <div class="fall-video-slide">
+                    <div class="video-wrap">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/{{ video.video_id }}"
+                            title="{{ video.title }} — N.E.W.S."
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    {% if video.title or video.sub %}
+                    <div class="video-caption">
+                        {% if video.title %}<span class="video-caption-title">{{ video.title }}</span>{% endif %}
+                        {% if video.sub %}<span class="video-caption-sub">{{ video.sub }}</span>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button class="fall-carousel-btn next" id="fall-video-next" aria-label="Next">&#8594;</button>
+        </div>
+    </div>
+</section>
+{% endif %}
 {% endif %}
 
 <!-- ── PHOTO CAROUSEL ────────────────────────── -->
