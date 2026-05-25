@@ -35,11 +35,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISSUE_NUM="${{ github.event.issue.number }}"
-          sleep 5
-          PR_NUM=$(gh pr list --base dev --json number,headRefName \
-            --jq ".[] | select(.headRefName | test(\"issue-${ISSUE_NUM}\")) | .number" | head -1)
-          if [ -n "$PR_NUM" ]; then
-            gh pr merge "$PR_NUM" --merge --delete-branch
+          git fetch origin
+          CLAUDE_BRANCH=$(git branch -r | grep "origin/claude/issue-${ISSUE_NUM}" | head -1 | sed 's|.*origin/||' | xargs)
+          if [ -n "$CLAUDE_BRANCH" ]; then
+            git checkout dev
+            git pull origin dev
+            git merge --no-ff "origin/${CLAUDE_BRANCH}" -m "Merge issue #${ISSUE_NUM} into dev"
+            git push origin dev
+            git push origin --delete "${CLAUDE_BRANCH}"
+            gh pr list --head "$CLAUDE_BRANCH" --json number --jq '.[].number' | xargs -I{} gh pr close {}
           fi
 
       - name: Open or update dev → main PR
