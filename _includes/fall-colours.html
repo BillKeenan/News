@@ -11,8 +11,8 @@
 
         <div class="video-wrap reveal">
             <iframe
-                src="https://www.youtube-nocookie.com/embed/X_-QvaN28KM"
-                title="Fall Colours Ride — N.E.W.S."
+                src="https://www.youtube-nocookie.com/embed/nBfjEq6A3ZE"
+                title="2021 Tour — Fall Colours Ride"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         </div>
@@ -23,9 +23,19 @@
             <div class="fall-carousel">
                 {% for item in site.data.fall-colours %}
                 <div class="fall-slide">
-                    <a class="lg-item" href="/{{ item.src }}">
-                        <img src="/{{ item.src }}" alt="{{ item.alt }}">
-                    </a>
+                    {% if item.type == 'video' %}
+                        <div class="carousel-video-wrap">
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/{{ item.video_id }}"
+                                title="{{ item.title }}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                    {% else %}
+                        <a class="lg-item" href="/{{ item.src }}">
+                            <img src="/{{ item.src }}" alt="{{ item.alt }}">
+                        </a>
+                    {% endif %}
                     {% if item.title or item.sub or item.link %}
                     <div class="photo-caption">
                         {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
