@@ -1,0 +1,14 @@
+title: "N.E.W.S. — North Eastern Widows Sons"
+description: "A chapter of the Widows Sons Ontario — Masonic motorcycle riding association in northeastern Ontario."
+url: "https://wsnews.ca"
+baseurl: ""
+
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .bundle/

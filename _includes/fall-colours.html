@@ -1,0 +1,43 @@
+<!-- ── FALL COLOURS ───────────────────────────── -->
+<section id="fall-colours">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-label">Annual Tradition</span>
+            <h2 class="section-title">Fall Colours Ride</h2>
+            <div class="section-rule"></div>
+            <p class="fall-intro">Each September since 2021, the brothers of N.E.W.S. saddle up for our annual Fall Colours Ride — a celebration of autumn in northern Ontario. We chart a course through some of the most spectacular riding country in the province: the sweeping curves of Algoma Country's <a class="fall-link" href="https://northernontario.travel/algoma-country/riding-algoma-country-ontarios-tail-dragon" target="_blank" rel="noopener">Tail of the Dragon</a>, the shores of Lake Huron, and the winding backroads of the Sudbury basin and beyond.</p>
+            <p class="fall-intro">The colours, the roads, and the company make this one of the most anticipated events on our chapter calendar. All brothers and their families are welcome.</p>
+        </div>
+
+        <div class="video-wrap reveal">
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/X_-QvaN28KM"
+                title="Fall Colours Ride — N.E.W.S."
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+
+        <div class="fall-carousel-wrap reveal">
+            <button class="fall-carousel-btn prev" id="fall-prev" aria-label="Previous">&#8592;</button>
+
+            <div class="fall-carousel">
+                {% for item in site.data.fall-colours %}
+                <div class="fall-slide">
+                    <a class="lg-item" href="/{{ item.src }}">
+                        <img src="/{{ item.src }}" alt="{{ item.alt }}">
+                    </a>
+                    {% if item.title or item.sub or item.link %}
+                    <div class="photo-caption">
+                        {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
+                        {% if item.sub %}<span class="photo-caption-sub">{{ item.sub }}</span>{% endif %}
+                        {% if item.link %}<a class="photo-caption-link" href="{{ item.link.href }}" target="_blank" rel="noopener">{{ item.link.label }} &#x2192;</a>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <button class="fall-carousel-btn next" id="fall-next" aria-label="Next">&#8594;</button>
+        </div>
+    </div>
+</section>
