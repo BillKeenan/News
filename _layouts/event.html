@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% elsif site.description %}<meta name="description" content="{{ site.description }}">{% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/lib/lightgallery/css/lightgallery.min.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/event.css' | relative_url }}">
+</head>
+<body class="event-page">
+
+<!-- ── EVENT NAV ─────────────────────────────── -->
+<nav id="nav" class="event-nav">
+    <a href="/" class="nav-logo">N.E.W.S.</a>
+    <a href="/" class="event-nav-back">&#8592; wsnews.ca</a>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────── -->
+<div class="event-hero" style="background-image: url('{{ page.hero_image }}')">
+    <div class="event-hero-overlay"></div>
+    <div class="hero-topbar"></div>
+
+    <div class="event-hero-content">
+        <span class="event-hero-label">{{ page.event_label | default: "Chapter Event" }}</span>
+        <h1 class="event-hero-title">{{ page.event_name }}</h1>
+        <p class="event-hero-year">{{ page.event_year }}</p>
+        <div class="event-hero-rule"></div>
+        <p class="event-hero-tagline">{{ page.tagline }}</p>
+    </div>
+
+    <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</div>
+
+<!-- ── INVITATION + DETAILS ──────────────────── -->
+<section class="event-body">
+    <div class="event-inner">
+        <div class="event-content-grid">
+
+            <div class="event-prose">
+                {{ content }}
+            </div>
+
+            <div class="event-details-panel">
+                <div class="about-seal">
+                    <div class="about-facts">
+                        {% for detail in page.details %}
+                        <div class="fact">
+                            <span class="fact-label">{{ detail.label }}</span>
+                            <span class="fact-value">{{ detail.value }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── VIDEO ─────────────────────────────────── -->
+{% if page.video_id %}
+<section class="event-video-section">
+    <div class="event-inner">
+        <span class="section-label">On the Road</span>
+        <h2 class="section-title">From the Route</h2>
+        <div class="section-rule"></div>
+        <div class="video-wrap">
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/{{ page.video_id }}"
+                title="{{ page.event_name }} — N.E.W.S."
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ── PHOTO CAROUSEL ────────────────────────── -->
+{% if page.photos_data %}
+{% assign photos = site.data[page.photos_data] %}
+{% if photos %}
+<section class="event-photos-section">
+    <div class="event-inner">
+        <span class="section-label">Past Rides</span>
+        <h2 class="section-title">Photo Gallery</h2>
+        <div class="section-rule"></div>
+
+        <div class="fall-carousel-wrap">
+            <button class="fall-carousel-btn prev" id="fall-prev" aria-label="Previous">&#8592;</button>
+            <div class="fall-carousel">
+                {% for item in photos %}
+                <div class="fall-slide">
+                    <a class="lg-item" href="/{{ item.src }}">
+                        <img src="/{{ item.src }}" alt="{{ item.alt }}">
+                    </a>
+                    {% if item.title or item.sub or item.link %}
+                    <div class="photo-caption">
+                        {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
+                        {% if item.sub %}<span class="photo-caption-sub">{{ item.sub }}</span>{% endif %}
+                        {% if item.link %}<a class="photo-caption-link" href="{{ item.link.href }}" target="_blank" rel="noopener">{{ item.link.label }} &#x2192;</a>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button class="fall-carousel-btn next" id="fall-next" aria-label="Next">&#8594;</button>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endif %}
+
+<!-- ── MAP ───────────────────────────────────── -->
+<section class="event-map-section">
+    <div class="event-inner">
+        <span class="section-label">Getting There</span>
+        <h2 class="section-title">Route &amp; Meeting Point</h2>
+        <div class="section-rule"></div>
+        {% if page.map_embed contains 'maps/embed' %}
+        <div class="map-wrap">
+            <iframe
+                src="{{ page.map_embed }}"
+                title="Event route map"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        {% elsif page.map_embed %}
+        <div class="map-placeholder">
+            <span class="map-placeholder-icon">&#9678;</span>
+            <p class="map-placeholder-text">View the Route</p>
+            <p class="map-placeholder-sub">
+                <a class="map-route-link" href="{{ page.map_embed }}" target="_blank" rel="noopener">Open route on Google Maps &#x2192;</a>
+            </p>
+        </div>
+        {% else %}
+        <div class="map-placeholder">
+            <span class="map-placeholder-icon">&#9678;</span>
+            <p class="map-placeholder-text">Route map coming soon</p>
+            <p class="map-placeholder-sub">Details will be shared closer to the event date. Contact us at <a href="mailto:contact@wsnews.ca">contact@wsnews.ca</a> with questions.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+    <img class="footer-compass" src="/images/ws-news.svg" alt="N.E.W.S. Logo">
+    <span class="footer-logo">N.E.W.S.</span>
+    <p class="footer-chapter">North Eastern Widows Sons</p>
+    <div class="footer-divider"></div>
+    <p class="footer-parent">A proud chapter of <a href="https://widowssonsontario.com/" target="_blank" rel="noopener noreferrer">Widows Sons Ontario</a></p>
+    <p class="footer-parent"><a href="mailto:contact@wsnews.ca">contact@wsnews.ca</a></p>
+    <p class="footer-disclaimer">
+        We are not a gang, 1% club, or MC, nor do we intend disrespect to any.<br>
+        We are Master Masons who ride.
+    </p>
+    <p class="footer-copy">&copy; {{ site.time | date: "%Y" }} North Eastern Widows Sons &mdash; All rights reserved.</p>
+</footer>
+
+<script src="{{ '/lib/lightgallery/lightgallery.umd.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
