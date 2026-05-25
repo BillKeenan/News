@@ -1,0 +1,27 @@
+<!-- ── GALLERY ────────────────────────────────── -->
+<section id="gallery">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-label">On the Road</span>
+            <h2 class="section-title">Chapter Gallery</h2>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="gallery-grid">
+            {% for item in site.data.gallery %}
+            <div class="photo-slot reveal">
+                <a class="lg-item" href="/{{ item.src }}">
+                    <img src="/{{ item.src }}" alt="{{ item.alt }}">
+                </a>
+                {% if item.title or item.sub or item.link %}
+                <div class="photo-caption">
+                    {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
+                    {% if item.sub %}<span class="photo-caption-sub">{{ item.sub }}</span>{% endif %}
+                    {% if item.link %}<a class="photo-caption-link" href="{{ item.link.href }}" target="_blank" rel="noopener">{{ item.link.label }} &#x2192;</a>{% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

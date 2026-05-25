@@ -1,0 +1,31 @@
+<!-- ── PHILANTHROPY ────────────────────────────── -->
+<section id="philanthropy">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-label">Community</span>
+            <h2 class="section-title">Giving Back</h2>
+            <div class="section-rule"></div>
+            <p class="giving-intro">At the heart of everything we do is a commitment to our community. The brothers of N.E.W.S. are proud to support local charities and organizations that make a real difference in the lives of our neighbours across north eastern Ontario.</p>
+        </div>
+
+        <div class="giving-feature reveal" id="giving-feature">
+            <a class="lg-item" href="/images/hsn-donation-2026.jpg">
+                <img src="/images/hsn-donation-2026.jpg" alt="N.E.W.S. presenting $1,000 cheque to the HSN Foundation, March 2026">
+            </a>
+            <div class="giving-feature-caption">
+                <span>N.E.W.S. presents $1,000 to the HSN Foundation &mdash; March 30, 2026</span>
+            </div>
+        </div>
+
+        <div class="giving-cards">
+            {% for donation in site.data.donations %}
+            <div class="giving-card reveal">
+                <div class="giving-amount">{{ donation.amount }}</div>
+                <span class="giving-amount-label">{{ donation.period }}</span>
+                <div class="giving-charity">{{ donation.charity }}</div>
+                <p class="giving-desc">{{ donation.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

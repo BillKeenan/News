@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% elsif site.description %}<meta name="description" content="{{ site.description }}">{% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/lib/lightgallery/css/lightgallery.min.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+
+<!-- ── NAV ───────────────────────────────────── -->
+<nav id="nav">
+    <a href="#hero" class="nav-logo">N.E.W.S.</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#philanthropy">Giving Back</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#philanthropy">Giving Back</a>
+    <a href="#contact">Contact</a>
+</div>
+
+{{ content }}
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+    <img class="footer-compass" src="/images/ws-news.svg" alt="N.E.W.S. Logo">
+
+    <span class="footer-logo">N.E.W.S.</span>
+    <p class="footer-chapter">North Eastern Widows Sons</p>
+
+    <div class="footer-divider"></div>
+
+    <p class="footer-parent">A proud chapter of <a href="https://widowssonsontario.com/" target="_blank" rel="noopener noreferrer">Widows Sons Ontario</a></p>
+    <p class="footer-parent"><a href="mailto:contact@wsnews.ca">contact@wsnews.ca</a></p>
+
+    <p class="footer-disclaimer">
+        We are not a gang, 1% club, or MC, nor do we intend disrespect to any.<br>
+        We are Master Masons who ride.
+    </p>
+
+    <p class="footer-copy">&copy; {{ site.time | date: "%Y" }} North Eastern Widows Sons &mdash; All rights reserved.</p>
+</footer>
+
+<script src="{{ '/lib/lightgallery/lightgallery.umd.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
