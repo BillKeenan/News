@@ -45,6 +45,26 @@ mobileMenu.querySelectorAll('a').forEach(a => {
     });
 });
 
+// Fall Colours carousel
+const fallCarousel = document.querySelector('.fall-carousel');
+if (fallCarousel) {
+    document.getElementById('fall-prev').addEventListener('click', () => {
+        fallCarousel.scrollBy({ left: -fallCarousel.offsetWidth, behavior: 'smooth' });
+    });
+    document.getElementById('fall-next').addEventListener('click', () => {
+        fallCarousel.scrollBy({ left: fallCarousel.offsetWidth, behavior: 'smooth' });
+    });
+    document.querySelectorAll('.fall-slide').forEach(slide => {
+        lightGallery(slide, {
+            selector:        '.lg-item',
+            download:        false,
+            counter:         false,
+            closable:        true,
+            backdropDuration: 200,
+        });
+    });
+}
+
 // Scroll-reveal
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

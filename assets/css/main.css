@@ -681,6 +681,103 @@ footer {
     opacity: 0.45;
 }
 
+/* ── FALL COLOURS ─────────────────────────────── */
+#fall-colours {
+    background: var(--dark);
+    border-top: 1px solid var(--gold-dim);
+}
+
+.fall-intro {
+    font-size: 1.13rem;
+    line-height: 1.82;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+    max-width: 660px;
+}
+.fall-link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140,106,24,0.35);
+    transition: border-color 0.2s, color 0.2s;
+}
+.fall-link:hover { color: var(--gold-light); border-color: var(--gold); }
+
+/* Responsive video */
+.video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+    background: #000;
+}
+.video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+}
+
+/* Carousel */
+.fall-carousel-wrap {
+    position: relative;
+    margin-top: 3rem;
+    padding: 0 1.5rem;
+}
+.fall-carousel {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.fall-carousel::-webkit-scrollbar { display: none; }
+
+.fall-slide {
+    flex: 0 0 calc(33.333% - 0.84rem);
+    scroll-snap-align: start;
+    height: 350px;
+    background: var(--black);
+    border: 1px solid rgba(140,106,24,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.35s ease;
+}
+.fall-slide:hover { border-color: rgba(140,106,24,0.38); }
+.fall-slide img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
+}
+
+.fall-carousel-btn {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(244,239,228,0.92);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    font-size: 1.1rem;
+    width: 2.8rem; height: 2.8rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s, border-color 0.2s;
+}
+.fall-carousel-btn:hover { background: #fff; border-color: var(--gold); }
+.fall-carousel-btn.prev { left: -1.4rem; }
+.fall-carousel-btn.next { right: -1.4rem; }
+
+@media (max-width: 900px) {
+    .fall-slide { flex: 0 0 calc(50% - 0.63rem); }
+    .fall-carousel-btn { display: none; }
+    .fall-carousel-wrap { padding: 0; }
+}
+@media (max-width: 640px) {
+    .fall-slide { flex: 0 0 90%; }
+}
+
 /* ── ANIMATIONS ────────────────────────────────── */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(28px); }
