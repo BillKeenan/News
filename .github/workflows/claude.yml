@@ -34,6 +34,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           ISSUE_NUM="${{ github.event.issue.number }}"
           git fetch origin
           CLAUDE_BRANCH=$(git branch -r | grep "origin/claude/issue-${ISSUE_NUM}" | head -1 | sed 's|.*origin/||' | xargs)
