@@ -48,12 +48,31 @@ mobileMenu.querySelectorAll('a').forEach(a => {
 // Fall Colours photo carousel
 const fallCarousel = document.querySelector('.fall-carousel');
 if (fallCarousel) {
-    document.getElementById('fall-prev').addEventListener('click', () => {
-        fallCarousel.scrollBy({ left: -fallCarousel.offsetWidth, behavior: 'smooth' });
-    });
-    document.getElementById('fall-next').addEventListener('click', () => {
-        fallCarousel.scrollBy({ left: fallCarousel.offsetWidth, behavior: 'smooth' });
-    });
+    const prevBtn = document.getElementById('fall-prev');
+    const nextBtn = document.getElementById('fall-next');
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const scrollAmount = fallCarousel.offsetWidth;
+            if (fallCarousel.scrollBy) {
+                fallCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                fallCarousel.scrollLeft -= scrollAmount;
+            }
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const scrollAmount = fallCarousel.offsetWidth;
+            if (fallCarousel.scrollBy) {
+                fallCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            } else {
+                fallCarousel.scrollLeft += scrollAmount;
+            }
+        });
+    }
+    
     document.querySelectorAll('.fall-slide').forEach(slide => {
         lightGallery(slide, {
             selector:        '.lg-item',
@@ -65,16 +84,6 @@ if (fallCarousel) {
     });
 }
 
-// Fall Colours video carousel
-const fallVideoCarousel = document.querySelector('.fall-video-carousel');
-if (fallVideoCarousel) {
-    document.getElementById('fall-video-prev').addEventListener('click', () => {
-        fallVideoCarousel.scrollBy({ left: -fallVideoCarousel.offsetWidth, behavior: 'smooth' });
-    });
-    document.getElementById('fall-video-next').addEventListener('click', () => {
-        fallVideoCarousel.scrollBy({ left: fallVideoCarousel.offsetWidth, behavior: 'smooth' });
-    });
-}
 
 // Scroll-reveal
 const observer = new IntersectionObserver((entries) => {
