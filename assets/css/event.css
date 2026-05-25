@@ -1,0 +1,254 @@
+/* ═══════════════════════════════════════════════
+   EVENT PAGE STYLES
+   Used by _layouts/event.html
+   ═══════════════════════════════════════════════ */
+
+/* ── EVENT NAV ───────────────────────────────── */
+.event-nav {
+    justify-content: space-between;
+}
+.event-nav-back {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    opacity: 0.65;
+    transition: color 0.2s, opacity 0.2s;
+}
+.event-nav-back:hover { color: var(--gold); opacity: 1; }
+
+/* ── EVENT HERO ──────────────────────────────── */
+.event-hero {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(28,22,16,0.55) 0%,
+        rgba(28,22,16,0.35) 40%,
+        rgba(28,22,16,0.65) 100%
+    );
+}
+
+.event-hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 7rem 2rem 5rem;
+    max-width: 860px;
+    width: 100%;
+}
+
+.event-hero-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.9);
+    display: block;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.event-hero-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 9vw, 6.5rem);
+    color: #f4efe4;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    margin-bottom: 0.4rem;
+    animation: fadeUp 0.9s 0.12s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.event-hero-year {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 5vw, 3.2rem);
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 1.75rem;
+    animation: fadeUp 0.9s 0.22s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.event-hero-rule {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.7), transparent);
+    margin: 0 auto 1.75rem;
+    animation: fadeUp 0.9s 0.32s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.event-hero-tagline {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    color: rgba(244,239,228,0.85);
+    line-height: 1.65;
+    max-width: 480px;
+    margin: 0 auto;
+    animation: fadeUp 0.9s 0.44s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── INVITATION + DETAILS ────────────────────── */
+.event-body {
+    background: var(--dark);
+    border-top: 1px solid var(--gold-dim);
+    padding: 7rem 2rem;
+}
+
+.event-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.event-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    align-items: start;
+}
+
+.event-prose h2.section-title {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+.event-prose p {
+    font-size: 1.13rem;
+    line-height: 1.82;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+}
+
+.event-prose p:first-of-type::first-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    float: left;
+    line-height: 0.78;
+    margin-right: 0.08em;
+    margin-top: 0.12em;
+}
+
+.event-details-panel .about-seal {
+    position: sticky;
+    top: 7rem;
+}
+
+/* ── VIDEO SECTION ───────────────────────────── */
+.event-video-section {
+    background: var(--black);
+    border-top: 1px solid var(--gold-dim);
+    padding: 7rem 2rem;
+}
+
+/* ── PHOTOS SECTION ──────────────────────────── */
+.event-photos-section {
+    background: var(--dark);
+    border-top: 1px solid var(--gold-dim);
+    padding: 7rem 2rem;
+}
+
+/* ── MAP SECTION ─────────────────────────────── */
+.event-map-section {
+    background: var(--black);
+    border-top: 1px solid var(--gold-dim);
+    padding: 7rem 2rem;
+}
+
+.map-wrap {
+    position: relative;
+    padding-bottom: 50%;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid var(--gold-dim);
+}
+.map-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+}
+
+.map-placeholder {
+    border: 1px solid var(--gold-dim);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+}
+.map-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 7px; right: 7px; bottom: 7px; left: 7px;
+    border: 1px solid rgba(140,106,24,0.1);
+    pointer-events: none;
+}
+.map-placeholder-icon {
+    font-size: 2.5rem;
+    color: var(--gold);
+    opacity: 0.45;
+    display: block;
+    margin-bottom: 1.25rem;
+}
+.map-placeholder-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+}
+.map-placeholder-sub {
+    font-size: 0.97rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
+.map-placeholder-sub a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140,106,24,0.35);
+    transition: border-color 0.2s;
+}
+.map-placeholder-sub a:hover { border-color: var(--gold); }
+
+.map-route-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 900px) {
+    .event-content-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .event-details-panel .about-seal {
+        position: static;
+    }
+    .event-hero {
+        background-attachment: scroll;
+    }
+}
+@media (max-width: 640px) {
+    .event-body,
+    .event-video-section,
+    .event-photos-section,
+    .event-map-section { padding: 5rem 1.5rem; }
+}
