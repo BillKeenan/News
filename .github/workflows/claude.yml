@@ -27,12 +27,17 @@ jobs:
       - uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          custom_instructions: |
-            When working on issues, always follow this workflow:
-            1. Check out the `dev` branch (create it off `main` if it doesn't exist).
-            2. Make the changes required by the issue.
-            3. Commit with a message referencing the issue number, e.g. "Fix typo in header (#7)".
-            4. Push to the `dev` branch.
-            5. If no open PR from `dev` to `main` exists, create one titled "Dev — pending issues" summarising all commits.
-               If a PR already exists, just update it with the new commit (no new PR needed).
-            Never push directly to `main`.
+          base_branch: dev
+
+      - name: Merge into dev
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_NUM="${{ github.event.issue.number }}"
+          sleep 5
+          PR_NUM=$(gh pr list --base dev --json number,headRefName \
+            --jq ".[] | select(.headRefName | test(\"issue-${ISSUE_NUM}\")) | .number" | head -1)
+          if [ -n "$PR_NUM" ]; then
+            gh pr merge "$PR_NUM" --merge --delete-branch
+          fi
