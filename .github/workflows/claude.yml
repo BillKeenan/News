@@ -1,0 +1,32 @@
+name: Claude Code
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issues' && github.event.label.name == 'claude') ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          custom_instructions: |
+            When working on issues, always follow this workflow:
+            1. Check out the `dev` branch (create it off `main` if it doesn't exist).
+            2. Make the changes required by the issue.
+            3. Commit with a message referencing the issue number, e.g. "Fix typo in header (#7)".
+            4. Push to the `dev` branch.
+            5. If no open PR from `dev` to `main` exists, create one titled "Dev — pending issues" summarising all commits.
+               If a PR already exists, just update it with the new commit (no new PR needed).
+            Never push directly to `main`.
