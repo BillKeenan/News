@@ -45,7 +45,7 @@ mobileMenu.querySelectorAll('a').forEach(a => {
     });
 });
 
-// Fall Colours photo carousel
+// Fall Colours gallery carousel
 const fallCarousel = document.querySelector('.fall-carousel');
 if (fallCarousel) {
     const prevBtn = document.getElementById('fall-prev');
