@@ -1,0 +1,30 @@
+{% assign _items = site.data[include.data_key] %}
+{% if _items %}
+<div class="photo-carousel-wrap{% if include.class %} {{ include.class }}{% endif %}">
+    <button class="carousel-btn prev" aria-label="Previous">&#8592;</button>
+    <div class="photo-carousel" {% if include.id %}id="{{ include.id }}"{% endif %}>
+        {% for item in _items %}
+        <div class="carousel-slide">
+            {% if item.type == "video" %}
+            <a class="yt-thumb-link" href="https://www.youtube.com/watch?v={{ item.video_id }}" target="_blank" rel="noopener" aria-label="{{ item.title | default: 'Watch video' }} on YouTube">
+                <img src="https://img.youtube.com/vi/{{ item.video_id }}/hqdefault.jpg" alt="{{ item.title | default: item.sub }}" loading="lazy">
+                <span class="yt-play-icon" aria-hidden="true">&#9654;</span>
+            </a>
+            {% else %}
+            <a class="lg-item" href="/{{ item.src }}">
+                <img src="/{{ item.src }}" alt="{{ item.alt }}">
+            </a>
+            {% endif %}
+            {% if item.title or item.sub or item.link %}
+            <div class="photo-caption">
+                {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
+                {% if item.sub %}<span class="photo-caption-sub">{{ item.sub }}</span>{% endif %}
+                {% if item.link %}<a class="photo-caption-link" href="{{ item.link.href }}" target="_blank" rel="noopener">{{ item.link.label }} &#x2192;</a>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-btn next" aria-label="Next">&#8594;</button>
+</div>
+{% endif %}

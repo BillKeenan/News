@@ -31,58 +31,41 @@ window.addEventListener('scroll', () => {
 const hamburger  = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-});
-
-mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        document.body.style.overflow = '';
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
     });
-});
 
-// Fall Colours gallery carousel
-const fallCarousel = document.querySelector('.fall-carousel');
-if (fallCarousel) {
-    const prevBtn = document.getElementById('fall-prev');
-    const nextBtn = document.getElementById('fall-next');
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            const scrollAmount = fallCarousel.offsetWidth;
-            if (fallCarousel.scrollBy) {
-                fallCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                fallCarousel.scrollLeft -= scrollAmount;
-            }
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const scrollAmount = fallCarousel.offsetWidth;
-            if (fallCarousel.scrollBy) {
-                fallCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            } else {
-                fallCarousel.scrollLeft += scrollAmount;
-            }
-        });
-    }
-    
-    document.querySelectorAll('.fall-slide').forEach(slide => {
-        lightGallery(slide, {
-            selector:        '.lg-item',
-            download:        false,
-            counter:         false,
-            closable:        true,
-            backdropDuration: 200,
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
         });
     });
 }
+
+// Photo carousel component — works for any number of carousels on the page
+document.querySelectorAll('.photo-carousel').forEach(carousel => {
+    const wrap = carousel.closest('.photo-carousel-wrap');
+    if (wrap) {
+        wrap.querySelector('.carousel-btn.prev')?.addEventListener('click', () => {
+            carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+        });
+        wrap.querySelector('.carousel-btn.next')?.addEventListener('click', () => {
+            carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+        });
+    }
+    lightGallery(carousel, {
+        selector:        '.lg-item',
+        download:        false,
+        counter:         true,
+        closable:        true,
+        backdropDuration: 200,
+    });
+});
 
 
 // Scroll-reveal

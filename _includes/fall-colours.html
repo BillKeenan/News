@@ -17,37 +17,6 @@
                 allowfullscreen></iframe>
         </div>
 
-        <div class="fall-carousel-wrap reveal">
-            <button class="fall-carousel-btn prev" id="fall-prev" aria-label="Previous">&#8592;</button>
-
-            <div class="fall-carousel">
-                {% for item in site.data.fall-colours %}
-                <div class="fall-slide">
-                    {% if item.type == 'video' %}
-                        <div class="carousel-video-wrap">
-                            <iframe
-                                src="https://www.youtube-nocookie.com/embed/{{ item.video_id }}"
-                                title="{{ item.title }}"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                        </div>
-                    {% else %}
-                        <a class="lg-item" href="/{{ item.src }}">
-                            <img src="/{{ item.src }}" alt="{{ item.alt }}">
-                        </a>
-                    {% endif %}
-                    {% if item.title or item.sub or item.link %}
-                    <div class="photo-caption">
-                        {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
-                        {% if item.sub %}<span class="photo-caption-sub">{{ item.sub }}</span>{% endif %}
-                        {% if item.link %}<a class="photo-caption-link" href="{{ item.link.href }}" target="_blank" rel="noopener">{{ item.link.label }} &#x2192;</a>{% endif %}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-
-            <button class="fall-carousel-btn next" id="fall-next" aria-label="Next">&#8594;</button>
-        </div>
+        {% include photo-carousel.html data_key="fall-colours" id="fall-colours-carousel" class="reveal" %}
     </div>
 </section>
