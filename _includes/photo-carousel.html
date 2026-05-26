@@ -6,10 +6,10 @@
         {% for item in _items %}
         <div class="carousel-slide">
             {% if item.type == "video" %}
-            <a class="yt-thumb-link" href="https://www.youtube.com/watch?v={{ item.video_id }}" target="_blank" rel="noopener" aria-label="{{ item.title | default: 'Watch video' }} on YouTube">
+            <button class="yt-thumb-btn" data-video-id="{{ item.video_id }}" aria-label="Play {{ item.title | default: 'video' }}">
                 <img src="https://img.youtube.com/vi/{{ item.video_id }}/hqdefault.jpg" alt="{{ item.title | default: item.sub }}" loading="lazy">
                 <span class="yt-play-icon" aria-hidden="true">&#9654;</span>
-            </a>
+            </button>
             {% else %}
             <a class="lg-item" href="/{{ item.src }}">
                 <img src="/{{ item.src }}" alt="{{ item.alt }}">

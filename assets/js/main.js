@@ -47,6 +47,36 @@ if (hamburger && mobileMenu) {
     });
 }
 
+// Video modal
+const videoModal = document.getElementById('video-modal');
+if (videoModal) {
+    const videoFrame = document.getElementById('video-modal-frame');
+
+    function openVideoModal(id) {
+        videoFrame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+        videoModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+        videoModal.classList.remove('open');
+        videoFrame.src = '';
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.yt-thumb-btn');
+        if (btn) { openVideoModal(btn.dataset.videoId); return; }
+        if (e.target === videoModal) closeVideoModal();
+    });
+
+    document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeVideoModal();
+    });
+}
+
 // Photo carousel component — works for any number of carousels on the page
 document.querySelectorAll('.photo-carousel').forEach(carousel => {
     const wrap = carousel.closest('.photo-carousel-wrap');
