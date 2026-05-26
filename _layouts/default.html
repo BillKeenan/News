@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% elsif site.description %}<meta name="description" content="{{ site.description }}">{% endif %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/lib/lightgallery/css/lightgallery.min.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
@@ -48,6 +46,13 @@
 
     <p class="footer-parent">A proud chapter of <a href="https://widowssonsontario.com/" target="_blank" rel="noopener noreferrer">Widows Sons Ontario</a></p>
     <p class="footer-parent"><a href="mailto:contact@wsnews.ca">contact@wsnews.ca</a></p>
+
+    <div class="footer-divider"></div>
+
+    <a href="https://ontariomasons.ca" target="_blank" rel="noopener noreferrer" class="footer-ontario-link">
+        <img class="footer-ontario-logo" src="/images/ontario-masons-logo.png" alt="OntarioMasons.ca">
+    </a>
+    <p class="footer-ontario-desc">OntarioMasons.ca is the official website of The Grand Lodge of Canada, in the province of Ontario.</p>
 
     <p class="footer-disclaimer">
         We are not a gang, 1% club, or MC, nor do we intend disrespect to any.<br>
