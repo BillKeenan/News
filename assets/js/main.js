@@ -31,39 +31,72 @@ window.addEventListener('scroll', () => {
 const hamburger  = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-});
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
 
-mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        document.body.style.overflow = '';
-    });
-});
-
-// Fall Colours carousel
-const fallCarousel = document.querySelector('.fall-carousel');
-if (fallCarousel) {
-    document.getElementById('fall-prev').addEventListener('click', () => {
-        fallCarousel.scrollBy({ left: -fallCarousel.offsetWidth, behavior: 'smooth' });
-    });
-    document.getElementById('fall-next').addEventListener('click', () => {
-        fallCarousel.scrollBy({ left: fallCarousel.offsetWidth, behavior: 'smooth' });
-    });
-    document.querySelectorAll('.fall-slide').forEach(slide => {
-        lightGallery(slide, {
-            selector:        '.lg-item',
-            download:        false,
-            counter:         false,
-            closable:        true,
-            backdropDuration: 200,
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
         });
     });
 }
+
+// Video modal
+const videoModal = document.getElementById('video-modal');
+if (videoModal) {
+    const videoFrame = document.getElementById('video-modal-frame');
+
+    function openVideoModal(id) {
+        videoFrame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+        videoModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+        videoModal.classList.remove('open');
+        videoFrame.src = '';
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.yt-thumb-btn');
+        if (btn) { openVideoModal(btn.dataset.videoId); return; }
+        if (e.target === videoModal) closeVideoModal();
+    });
+
+    document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeVideoModal();
+    });
+}
+
+// Photo carousel component — works for any number of carousels on the page
+document.querySelectorAll('.photo-carousel').forEach(carousel => {
+    const wrap = carousel.closest('.photo-carousel-wrap');
+    if (wrap) {
+        wrap.querySelector('.carousel-btn.prev')?.addEventListener('click', () => {
+            carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+        });
+        wrap.querySelector('.carousel-btn.next')?.addEventListener('click', () => {
+            carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+        });
+    }
+    lightGallery(carousel, {
+        selector:        '.lg-item',
+        download:        false,
+        counter:         true,
+        closable:        true,
+        backdropDuration: 200,
+    });
+});
+
 
 // Scroll-reveal
 const observer = new IntersectionObserver((entries) => {

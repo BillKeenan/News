@@ -69,7 +69,7 @@
 <section class="event-video-section">
     <div class="event-inner">
         <span class="section-label">On the Road</span>
-        <h2 class="section-title">From the Route</h2>
+        <h2 class="section-title">2021 Tour</h2>
         <div class="section-rule"></div>
         <div class="video-wrap">
             <iframe
@@ -82,39 +82,16 @@
 </section>
 {% endif %}
 
-<!-- ── PHOTO CAROUSEL ────────────────────────── -->
+<!-- ── GALLERY CAROUSEL ───────────────────────── -->
 {% if page.photos_data %}
-{% assign photos = site.data[page.photos_data] %}
-{% if photos %}
 <section class="event-photos-section">
     <div class="event-inner">
         <span class="section-label">Past Rides</span>
-        <h2 class="section-title">Photo Gallery</h2>
+        <h2 class="section-title">Gallery</h2>
         <div class="section-rule"></div>
-
-        <div class="fall-carousel-wrap">
-            <button class="fall-carousel-btn prev" id="fall-prev" aria-label="Previous">&#8592;</button>
-            <div class="fall-carousel">
-                {% for item in photos %}
-                <div class="fall-slide">
-                    <a class="lg-item" href="/{{ item.src }}">
-                        <img src="/{{ item.src }}" alt="{{ item.alt }}">
-                    </a>
-                    {% if item.title or item.sub or item.link %}
-                    <div class="photo-caption">
-                        {% if item.title %}<span class="photo-caption-title">{{ item.title }}</span>{% endif %}
-                        {% if item.sub %}<span class="photo-caption-sub">{{ item.sub }}</span>{% endif %}
-                        {% if item.link %}<a class="photo-caption-link" href="{{ item.link.href }}" target="_blank" rel="noopener">{{ item.link.label }} &#x2192;</a>{% endif %}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <button class="fall-carousel-btn next" id="fall-next" aria-label="Next">&#8594;</button>
-        </div>
+        {% include photo-carousel.html data_key=page.photos_data id="event-gallery" %}
     </div>
 </section>
-{% endif %}
 {% endif %}
 
 <!-- ── MAP ───────────────────────────────────── -->
@@ -165,6 +142,7 @@
     <p class="footer-copy">&copy; {{ site.time | date: "%Y" }} North Eastern Widows Sons &mdash; All rights reserved.</p>
 </footer>
 
+{% include video-modal.html %}
 <script src="{{ '/lib/lightgallery/lightgallery.umd.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
