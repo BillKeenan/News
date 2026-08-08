@@ -21,6 +21,18 @@ if (givingFeature) {
     });
 }
 
+// lightGallery — event poster
+const eventPoster = document.querySelector('.event-poster');
+if (eventPoster) {
+    lightGallery(eventPoster, {
+        selector:         '.lightbox-poster',
+        download:         false,
+        counter:          false,
+        closable:         true,
+        backdropDuration: 200,
+    });
+}
+
 // Nav solidifies on scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
