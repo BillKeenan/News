@@ -189,79 +189,103 @@ nav.solid {
     background: var(--black);
 }
 
-.hero-banner-announcement {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    background: linear-gradient(90deg, rgba(140,106,24,0.18) 0%, rgba(140,106,24,0.1) 100%);
-    border-bottom: 1px solid rgba(140,106,24,0.22);
-    padding: 0.75rem 1.5rem;
-    z-index: 100;
-    pointer-events: auto;
+/* ── EVENTS BANNER ─────────────────────────── */
+#events-banner {
+    background: linear-gradient(135deg, rgba(140,106,24,0.08) 0%, rgba(140,106,24,0.04) 100%);
+    border-top: 1px solid var(--gold-dim);
+    border-bottom: 1px solid var(--gold-dim);
+    padding: 3rem 2rem;
 }
-.announcement-content {
+.events-banner-inner {
     max-width: 1120px;
     margin: 0 auto;
+    text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-    pointer-events: auto;
+    gap: 1rem;
 }
-.announcement-badge {
+.events-banner-badge {
     font-family: 'Cinzel', serif;
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--gold);
-    background: rgba(140,106,24,0.12);
-    padding: 0.35rem 0.65rem;
+    background: rgba(140,106,24,0.15);
+    padding: 0.5rem 1rem;
     border: 1px solid var(--gold-dim);
     display: inline-block;
-    white-space: nowrap;
 }
-.announcement-text {
+.events-banner-title {
     font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.2;
+}
+.events-banner-details {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
     color: var(--text);
+    margin: 0;
 }
-.announcement-link {
+.events-banner-link {
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: var(--gold);
     text-decoration: none;
-    border-bottom: 1px solid rgba(140,106,24,0.35);
-    transition: color 0.2s, border-color 0.2s;
-    white-space: nowrap;
+    border: 1px solid var(--gold);
+    padding: 0.6rem 1.4rem;
+    display: inline-block;
+    transition: all 0.2s ease;
     cursor: pointer;
-    pointer-events: auto;
 }
-.announcement-link:hover {
-    color: var(--gold-light);
-    border-color: var(--gold);
-}
-.announcement-link:active {
-    color: var(--gold-light);
+.events-banner-link:hover {
+    background: var(--gold);
+    color: var(--black);
 }
 
 @media (max-width: 768px) {
-    .hero-banner-announcement {
-        padding: 0.6rem 1rem;
+    #events-banner {
+        padding: 2rem 1.5rem;
     }
-    .announcement-content {
-        gap: 0.6rem;
+    .events-banner-inner {
+        gap: 0.8rem;
     }
-    .announcement-badge {
-        font-size: 0.5rem;
-        padding: 0.3rem 0.5rem;
-    }
-    .announcement-text {
+    .events-banner-badge {
         font-size: 0.65rem;
+        padding: 0.4rem 0.8rem;
     }
-    .announcement-link {
+    .events-banner-details {
+        font-size: 0.85rem;
+    }
+    .events-banner-link {
+        font-size: 0.75rem;
+        padding: 0.5rem 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #events-banner {
+        padding: 1.5rem 1rem;
+    }
+    .events-banner-badge {
         font-size: 0.6rem;
+        padding: 0.35rem 0.7rem;
+    }
+    .events-banner-title {
+        font-size: 1.4rem;
+    }
+    .events-banner-details {
+        font-size: 0.8rem;
+    }
+    .events-banner-link {
+        font-size: 0.7rem;
+        padding: 0.45rem 1rem;
     }
 }
 
