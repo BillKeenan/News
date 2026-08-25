@@ -13,11 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const posterLink = document.querySelector('.lightbox-poster');
     if (posterLink) {
-        lightGallery(posterLink, {
+        const gallery = lightGallery(posterLink, {
             download:         false,
             counter:          false,
             closable:         true,
             backdropDuration: 200,
+        });
+
+        document.addEventListener('click', (e) => {
+            const lgImage = document.querySelector('.lg-image');
+            if (lgImage && lgImage.contains(e.target)) {
+                gallery.closeGallery();
+            }
         });
     }
 });
