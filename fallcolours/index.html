@@ -4,6 +4,32 @@ title: "Fall Colours Tour 2026 — N.E.W.S."
 description: "Join us for the 7th Annual Fall Colours Ride on Manitoulin Island, September 25-27, 2026."
 ---
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navLogo = document.querySelector('.nav-logo');
+    if (navLogo) {
+        navLogo.href = '/';
+    }
+
+    const posterLink = document.querySelector('.lightbox-poster');
+    if (posterLink) {
+        const gallery = lightGallery(posterLink, {
+            download:         false,
+            counter:          false,
+            closable:         true,
+            backdropDuration: 200,
+        });
+
+        document.addEventListener('click', (e) => {
+            const lgImage = document.querySelector('.lg-image');
+            if (lgImage && lgImage.contains(e.target)) {
+                gallery.closeGallery();
+            }
+        });
+    }
+});
+</script>
+
 <section id="fall-colours-detail" class="detail-section">
     <div class="section-inner">
         <!-- Header -->
