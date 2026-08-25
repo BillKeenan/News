@@ -222,17 +222,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .event-poster-detail {
     margin: 40px 0;
-    text-align: center;
+    display: grid;
+    place-items: center;
 }
 
 .event-poster-detail a {
-    display: block;
-    width: fit-content;
-    margin: 0 auto;
+    display: inline-block;
 }
 
 .event-poster-detail img {
-    max-width: 50%;
+    width: 100%;
+    max-width: 560px;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
