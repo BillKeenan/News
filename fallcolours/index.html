@@ -10,6 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (navLogo) {
         navLogo.href = '/';
     }
+
+    const eventPoster = document.querySelector('.event-poster-detail');
+    if (eventPoster) {
+        lightGallery(eventPoster, {
+            selector:         '.lightbox-poster',
+            download:         false,
+            counter:          false,
+            closable:         true,
+            backdropDuration: 200,
+        });
+    }
 });
 </script>
 
