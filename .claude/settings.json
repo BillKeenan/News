@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Edit(fallcolours/index.html)",
+      "Edit(*.css)",
+      "Edit(**/*.css)"
+    ]
+  }
+}
