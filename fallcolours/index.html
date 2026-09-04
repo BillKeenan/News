@@ -233,18 +233,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .event-poster-detail {
     margin: 40px 0;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .event-poster-detail a {
     display: inline-block;
+    max-width: 100%;
 }
 
 .event-poster-detail img {
     width: 100%;
     max-width: 600px;
-    height: auto;
+    height: auto !important;
     display: block;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
