@@ -306,7 +306,7 @@ nav.solid {
 .hero-inner {
     position: relative;
     z-index: 1;
-    padding: 7rem 2rem 5rem;
+    padding: 4.5rem 2rem 3rem;
     max-width: 900px;
     width: 100%;
 }
@@ -317,7 +317,7 @@ nav.solid {
     justify-content: center;
     align-items: baseline;
     gap: 0;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
     animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
 }
 .hero-letter {
@@ -376,12 +376,13 @@ nav.solid {
     animation: fadeUp 0.9s 0.6s cubic-bezier(0.22,1,0.36,1) both;
     display: flex;
     justify-content: center;
+    margin-top: -1.5rem;
 }
 .compass-rose {
-    width: 488px;
-    height: 488px;
-    max-width: 85vw;
-    max-height: 85vw;
+    width: 380px;
+    height: 380px;
+    max-width: 70vw;
+    max-height: 70vw;
     display: block;
 }
 
